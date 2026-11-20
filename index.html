@@ -2,31 +2,30 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>AppSwipe - Documentation</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Documentation AppSwipe">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>Documentation Projet CIEL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css">
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">Chargement...</div>
   <script>
+    const origOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url) {
+      if (typeof url === 'string' && (url.endsWith('.md') || url.includes('.md?'))) {
+        url += (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+      }
+      return origOpen.apply(this, arguments);
+    };
+
     window.$docsify = {
-      name: 'AppSwipe Docs',
-      repo: 'LOLMANREX/appswipe-docs',
-      homepage: 'Projet%20BAC/Fiche%20technique.md',
+      name: 'AppSwipe Doc',
       loadSidebar: true,
       subMaxLevel: 2,
-      search: {
-        maxAge: 86400000,
-        paths: 'auto',
-        placeholder: 'Rechercher...',
-        noData: 'Aucun résultat',
-        depth: 4
-      }
-    }
+      auto2top: true
+    };
   </script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 </body>
 </html>
